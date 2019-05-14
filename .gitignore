@@ -23,6 +23,9 @@ coverage
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
+# vscode配置项
+.vscode
+
 # Bower dependency directory (https://bower.io/)
 bower_components
 
@@ -53,6 +56,7 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+yarn.lock
 
 # dotenv environment variables file
 .env

@@ -39,8 +39,6 @@ const findMembers = function (instance, {
     return _find(instance)
 }
 
-
-
 const generateToken = function (uid, scope) {
     const secretKey = global.config.security.secretKey
     const expiresIn = global.config.security.expiresIn
@@ -55,5 +53,5 @@ const generateToken = function (uid, scope) {
 
 module.exports = {
     findMembers,
-    generateToken,
+    generateToken
 }
