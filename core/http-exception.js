@@ -1,13 +1,13 @@
-class HttpException extends Error{
-    constructor(msg='服务器异常',errorCode=10000, code=400){
+class HttpException extends Error {
+    constructor (msg = '服务器异常', errorCode = 10000, code = 400) {
         super()
+        this.msg = msg
         this.errorCode = errorCode
         this.code = code
-        this.msg = msg
     }
 }
 
-class ParameterException extends HttpException{
+class ParameterException extends HttpException {
     constructor(msg, errorCode){
         super()
         this.code = 400
