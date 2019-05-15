@@ -4,6 +4,10 @@ const catchError = async (ctx, next) => {
     try {
         await next()
     } catch (error) {
+        console.log(global)
+        if (global.config.environment === 'dev') {
+            throw error
+        }
         if (error.errorCode) {
             ctx.body = {
                 msg: error.msg,

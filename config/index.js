@@ -1,6 +1,13 @@
 const config = {
-    // dbUrl: 'mongodb://localhost:27017/gift', // MongoDB地址
-    port: process.env.PORT || 3000// 端口号
+    environment: 'dev',
+    port: process.env.PORT || 3000, // 端口号
+    database: {
+        dbName: 'island',
+        host: 'localhost',
+        part: 3306,
+        user: 'root',
+        password: '123456',
+    }
 }
 
 export default config

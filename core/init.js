@@ -8,6 +8,13 @@ class InitManager {
         InitManager.initLoadRouters()
     }
 
+    // 配置项
+    static loadConfig (path = '') {
+        const configPath = path || process.cwd() + '/config/index.js'
+        const config = require(configPath)
+        global.config = config
+    }
+
     // 配置路由
     static initLoadRouters() {
         const apiDirectory = `${process.cwd()}/app/api`
