@@ -1,6 +1,6 @@
 // 服务器异常
-class HttpException extends Error{
-    constructor(msg = '服务器异常', errorCode = 10000, code = 400){
+class HttpException extends Error {
+    constructor(msg = '服务器异常', errorCode = 10000, code = 400) {
         super()
         this.code = code
         this.errorCode = errorCode
@@ -9,8 +9,8 @@ class HttpException extends Error{
 }
 
 // 参数错误
-class ParameterException extends HttpException{
-    constructor(msg, errorCode){
+class ParameterException extends HttpException {
+    constructor(msg, errorCode) {
         super()
         this.code = 400
         this.errorCode = errorCode || 10000
@@ -19,8 +19,8 @@ class ParameterException extends HttpException{
 }
 
 // 成功
-class Success extends HttpException{
-    constructor(msg, errorCode){
+class Success extends HttpException {
+    constructor(msg, errorCode) {
         super()
         this.code = 201
         this.errorCode = errorCode || 0
@@ -28,7 +28,7 @@ class Success extends HttpException{
     }
 }
 // 404 未找到
-class NotFound extends HttpException{
+class NotFound extends HttpException {
     constructor(msg, errorCode) {
         super()
         this.code = 404
@@ -38,7 +38,7 @@ class NotFound extends HttpException{
 }
 
 // 授权失败
-class AuthFailed  extends HttpException {
+class AuthFailed extends HttpException {
     constructor(msg, errorCode) {
         super()
         this.code = 401
@@ -48,7 +48,7 @@ class AuthFailed  extends HttpException {
 }
 
 // 资源禁止访问
-class Forbbiden extends HttpException{
+class Forbbiden extends HttpException {
     constructor(msg, errorCode) {
         super()
         this.code = 403
@@ -56,7 +56,6 @@ class Forbbiden extends HttpException{
         this.msg = msg || '禁止访问'
     }
 }
-
 
 module.exports = {
     HttpException,

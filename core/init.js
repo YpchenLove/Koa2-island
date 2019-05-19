@@ -29,10 +29,10 @@ class InitManager {
     }
 
     // 注入全局异常
-    static loadHttpException(){
+    static loadHttpException() {
         const errors = require('./http-exception')
         global.errs = errors
     }
 }
- 
+
 module.exports = InitManager

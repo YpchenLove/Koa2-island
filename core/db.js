@@ -6,7 +6,7 @@ const db = new Sequelize(dbName, user, password, {
     dialect: 'mysql',
     host,
     port,
-    logging: true,
+    logging: (process.env.NODE_ENV !== 'production' ? console.log : null),
     timezone: '+08:00',
     define: {
         timestamps: true,
@@ -18,6 +18,6 @@ const db = new Sequelize(dbName, user, password, {
     }
 })
 
-db.sync()
+db.sync({ force: false })
 
 module.exports = { db }
