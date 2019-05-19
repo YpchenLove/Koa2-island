@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 
-const { HttpException } = require('../../../core/http-exception')
+const { Success } = require('../../../core/http-exception')
 const { RegisterValidator } = require('../../validators/validator')
 const { User } = require('../../models/user')
 
@@ -16,6 +16,7 @@ router.post('/register', async (ctx, next) => {
         password: v.get('body.password2')
     }
     const r = await User.create(user)
+    throw new Success('注册成功')
 })
 
 module.exports = router
