@@ -1,5 +1,5 @@
-import { db } from '../../core/db'
-import { Sequelize, Model } from 'sequelize'
+const { db } = require('../../core/db')
+const { Sequelize, Model } = require('sequelize')
 
 class user extends Model {
 

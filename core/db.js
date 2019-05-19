@@ -1,5 +1,5 @@
-import Sequelize from ''
-import { database } from '../config'
+const Sequelize = require('sequelize')
+const { database } = require('../config')
 const { dbName, host, user, password } = database
 
 const db = new Sequelize(dbName, user, password, {
@@ -20,4 +20,4 @@ const db = new Sequelize(dbName, user, password, {
 
 db.sync()
 
-export default { db }
+module.exports = { db }

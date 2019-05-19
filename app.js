@@ -1,12 +1,12 @@
 // 核心库
-import Koa from 'koa'
-import InitManager from './core/init'
-import parser from 'koa-bodyparser'
-import catchError from './middlewares/exception'
+const Koa = require('koa')
+const InitManager = require('./core/init')
+const parser = require('koa-bodyparser')
+const catchError = require('./middlewares/exception')
 
 // 辅助库
-import chalk from 'chalk'
-import config from './config'
+const chalk = require('chalk')
+const config = require('./config')
 
 const app = new Koa()
 const port = config.port
