@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const { database } = require('../config')
-const { dbName, host, user, password } = database
+const { dbName, host, port, user, password } = database
 
 const db = new Sequelize(dbName, user, password, {
     dialect: 'mysql',

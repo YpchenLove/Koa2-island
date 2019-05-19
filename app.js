@@ -11,6 +11,7 @@ const config = require('./config')
 const app = new Koa()
 const port = config.port
 
+// require('./app/models/user')
 // 中间件
 app.use(catchError)
 app.use(parser())

@@ -2,13 +2,12 @@ const requireDirectory = require('require-directory')
 const Router = require('koa-router')
 
 class InitManager {
-    // 入口方法
+    // 初始化
     static initCore(app) {
         InitManager.app = app
         InitManager.loadConfig()
         InitManager.initLoadRouters()
         InitManager.loadHttpException()
-
     }
 
     // 配置项
@@ -29,7 +28,7 @@ class InitManager {
         requireDirectory(module, apiDirectory, { visit: whenLoadModule })
     }
 
-    // 全局异常
+    // 注入全局异常
     static loadHttpException(){
         const errors = require('./http-exception')
         global.errs = errors

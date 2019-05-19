@@ -1,7 +1,7 @@
 const { db } = require('../../core/db')
 const { Sequelize, Model } = require('sequelize')
 
-class user extends Model {
+class User extends Model {
 
 }
 
@@ -18,7 +18,9 @@ User.init({
         type: Sequelize.STRING(64),
         unique: true
     }
-},{
-    sequelize: db, 
+}, {
+    sequelize: db,
     tableName: 'user'
 })
+
+module.exports = { User }
