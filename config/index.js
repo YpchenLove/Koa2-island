@@ -7,6 +7,10 @@ const config = {
         part: 3306,
         user: 'root',
         password: ''
+    },
+    security: {
+        secretKey: 'yangpengcheng19950215',
+        expiresIn: 60 * 60
     }
 }
 

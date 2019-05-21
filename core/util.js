@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
+
 /***
- * 
+ **
  */
 const findMembers = function (instance, {
     prefix,
@@ -9,9 +10,8 @@ const findMembers = function (instance, {
 }) {
     // 递归函数
     function _find(instance) {
-        //基线条件（跳出递归）
-        if (instance.__proto__ === null)
-            return []
+        // 基线条件（跳出递归）
+        if (instance.__proto__ === null) return []
 
         let names = Reflect.ownKeys(instance)
         names = names.filter((name) => {
@@ -28,12 +28,13 @@ const findMembers = function (instance, {
                 return true
             }
         }
-        if (prefix)
-            if (value.startsWith(prefix))
-                return true
-        if (specifiedType)
-            if (instance[value] instanceof specifiedType)
-                return true
+        if (prefix) {
+            if (value.startsWith(prefix)) return true
+        }
+
+        if (specifiedType) {
+            if (instance[value] instanceof specifiedType) return true
+        }
     }
 
     return _find(instance)
