@@ -1,10 +1,10 @@
 const Router = require('koa-router')
 
-const { Success } = require('../../../core/http-exception')
 const { TokenValidator } = require('../../validators/validator')
 const { User } = require('../../models/user')
 const { loginType } = require('../../lib/enum')
 const { generateToken } = require('../../../core/util')
+
 const router = new Router({
     prefix: '/v1/token'
 })

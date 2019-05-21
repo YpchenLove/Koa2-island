@@ -1,14 +1,14 @@
 const Router = require('koa-router')
 const { HttpException } = require('../../../core/http-exception')
 const { PositiveIntegerValidator } = require('../../validators/validator')
+const { Auth } = require('../../../middlewares/auth')
 
-const router = new Router()
+const router = new Router({
+    prefix: '/v1/book'
+})
 
-router.get('/v1/book/:id', (ctx, next) => {
-    const err = new HttpException('哈哈哈', 10002, 401)
-    throw err
-    // const v = new PositiveIntegerValidator().validate(ctx)
-    // const a = v.get('ctx.params.id')
+router.get('/:id', new Auth().m, (ctx, next) => {
+    ctx.body = ctx.auth.uid
 })
 
 module.exports = router

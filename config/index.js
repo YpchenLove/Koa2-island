@@ -10,7 +10,7 @@ const config = {
     },
     security: {
         secretKey: 'yangpengcheng19950215',
-        expiresIn: 60 * 60
+        expiresIn: 60 * 60 * 24 * 30
     }
 }
 
