@@ -4,6 +4,8 @@ const { db } = require('../../core/db')
 const { Sequelize, Model } = require('sequelize')
 
 class User extends Model {
+
+    // 验证账号
     static async verifyEmailPassword(email, plainPassword) {
         const user = await User.findOne({
             where: { email }
@@ -15,6 +17,22 @@ class User extends Model {
         if (!correct) {
             throw new global.errs.AuthFailed('密码不正确！')
         }
+        return user
+    }
+
+    // 查询openid
+    static async getUserByOpenid (openid) {
+        const user = await User.findOne({
+            where: { openid }
+        })
+        return user
+    }
+
+    // 注册openid
+    static async registerByOpenid (openid) {
+        const user = await User.create({
+            where: { openid }
+        })
         return user
     }
 }

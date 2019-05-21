@@ -2,6 +2,7 @@ const Router = require('koa-router')
 
 const { TokenValidator } = require('../../validators/validator')
 const { User } = require('../../models/user')
+const { WXManager } = require('../../services/wx')
 const { loginType } = require('../../lib/enum')
 const { generateToken } = require('../../../core/util')
 const { Auth } = require('../../../middlewares/auth')
@@ -22,8 +23,9 @@ router.post('/', async (ctx, next) => {
     case loginType.USER_EMAIL:
         token = await eamilLogin(v.get('body.account'), v.get('body.secret'))
         break
-    // case loginType.USER_MOBILE:
-    //     break
+    case loginType.USER_MINI_PROGRAM:
+        token = await WXManager.codeToToken(v.get('body.account'))
+        break
     // case loginType.USER_EMAIL:
     //     break
     default:
