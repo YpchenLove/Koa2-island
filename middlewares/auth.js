@@ -3,6 +3,11 @@ const basicAuth = require('basic-auth')
 const jwt = require('jsonwebtoken')
 
 class Auth {
+    constructor (level) {
+        this.level = level || 1
+        Auth.USER = 8
+        Auth.ADMIN = 8
+    }
     get m() {
         return async (ctx, next) => {
             const userToken = basicAuth(ctx.req)
@@ -19,6 +24,12 @@ class Auth {
                 if (error.name === 'TokenExprireError') {
                     errMsg = 'token已过期！'
                 }
+                throw new global.errs.Forbbiden(errMsg)
+            }
+
+            // API权限控制
+            if (decode.scope < this.level) {
+                errMsg = '权限不足'
                 throw new global.errs.Forbbiden(errMsg)
             }
 

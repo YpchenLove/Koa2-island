@@ -4,6 +4,7 @@ const { TokenValidator } = require('../../validators/validator')
 const { User } = require('../../models/user')
 const { loginType } = require('../../lib/enum')
 const { generateToken } = require('../../../core/util')
+const { Auth } = require('../../../middlewares/auth')
 
 const router = new Router({
     prefix: '/v1/token'
@@ -37,7 +38,7 @@ router.post('/', async (ctx, next) => {
 
 async function eamilLogin(account, secret) {
     const user = await User.verifyEmailPassword(account, secret)
-    const token = generateToken(user.id, 2)
+    const token = generateToken(user.id, Auth.USER)
     return token
 }
 

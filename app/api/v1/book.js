@@ -7,7 +7,7 @@ const router = new Router({
     prefix: '/v1/book'
 })
 
-router.get('/:id', new Auth().m, (ctx, next) => {
+router.get('/:id', new Auth(9).m, (ctx, next) => {
     ctx.body = ctx.auth.uid
 })
 
