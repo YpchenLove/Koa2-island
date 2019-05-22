@@ -9,7 +9,6 @@ class WXManager {
     // code 换取 token
     static async codeToToken (code) {
         const url = util.format(wx.loginUrl, wx.AppID, wx.AppSecret, code)
-        console.log(url)
         const result = await axios.get(url)
 
         if (result.status !== 200) {

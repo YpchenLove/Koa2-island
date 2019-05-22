@@ -24,9 +24,7 @@ router.post('/', async (ctx, next) => {
         token = await eamilLogin(v.get('body.account'), v.get('body.secret'))
         break
     case loginType.USER_MINI_PROGRAM:
-        console.log(token, 1)
         token = await WXManager.codeToToken(v.get('body.account'))
-        console.log(token, 1)
         break
     // case loginType.USER_EMAIL:
     //     break
