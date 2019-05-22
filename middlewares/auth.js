@@ -8,7 +8,7 @@ class Auth {
         Auth.USER = 8
         Auth.ADMIN = 8
     }
-    get m() {
+    get m () {
         return async (ctx, next) => {
             const userToken = basicAuth(ctx.req)
             let errMsg = 'token不合法！'
@@ -39,6 +39,16 @@ class Auth {
             }
 
             await next()
+        }
+    }
+
+    // 检测token有效
+    static verifyToken (token) {
+        try {
+            jwt.verify(token, global.config.security.secretKey)
+            return true
+        } catch {
+            return false
         }
     }
 }
