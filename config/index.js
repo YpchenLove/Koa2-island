@@ -15,7 +15,7 @@ const config = {
     wx: {
         AppID: 'wx83fc633e9309479f',
         AppSecret: '3d3bd227abc6ec51f58905e335c8f295',
-        loginUrl: `https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%S&grant_type=authorization_code`
+        loginUrl: `https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code`
     }
 }
 
