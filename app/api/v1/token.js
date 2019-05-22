@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 
-const { TokenValidator } = require('../../validators/validator')
+const { TokenValidator, NotEmptyValidator } = require('../../validators/validator')
 const { User } = require('../../models/user')
 const { WXManager } = require('../../services/wx')
 const { loginType } = require('../../lib/enum')
@@ -12,7 +12,7 @@ const router = new Router({
 })
 
 /**
-* @route   GET /
+* @route   POST
 * @desc    获取token
 * @access  public
 */
@@ -43,5 +43,18 @@ async function eamilLogin(account, secret) {
     const token = generateToken(user.id, Auth.USER)
     return token
 }
+
+/**
+* @route   POST
+* @desc    校验token
+* @access  public
+*/
+router.post('/verify', async (ctx, next) => {
+    const v = await new NotEmptyValidator().validate(ctx)
+    const result = Auth.verifyToken(v.get('body.token'))
+    ctx.body = {
+        result
+    }
+})
 
 module.exports = router
