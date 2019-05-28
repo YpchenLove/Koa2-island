@@ -11,7 +11,7 @@ Flow.init({
     type: Sequelize.INTEGER,
 }, {
     sequelize: db,
-    tableName: 'movie'
+    tableName: 'flow'
 })
 
 
