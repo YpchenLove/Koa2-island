@@ -12,7 +12,7 @@ const router = new Router({
 })
 
 /**
-* @route   POST
+* @route   POST /
 * @desc    获取token
 * @access  public
 */
@@ -45,7 +45,7 @@ async function eamilLogin(account, secret) {
 }
 
 /**
-* @route   POST
+* @route   POST /verify
 * @desc    校验token
 * @access  public
 */
