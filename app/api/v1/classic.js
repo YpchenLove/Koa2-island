@@ -16,11 +16,11 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
     const latest = await Flow.findOne({
         order: [
             ['index', 'DESC']
-        ]
+        ],
     })
-    const art = await Art.getData(latest.artId, latest.type)
+    const art = await Art.getData(latest.art_id, latest.type)
     art.setDataValue('index', latest.index)
-    ctx.body = art
+    ctx.body = latest
 })
 
 module.exports = router

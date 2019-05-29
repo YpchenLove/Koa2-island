@@ -7,8 +7,8 @@ const router = new Router({
     prefix: '/v1/book'
 })
 
-router.get('/:id', new Auth(9).m, (ctx, next) => {
-    ctx.body = ctx.auth.uid
+router.get('/:id', new Auth().m, async (ctx, next) => {
+
 })
 
 module.exports = router
