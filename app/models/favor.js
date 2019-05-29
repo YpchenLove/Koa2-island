@@ -3,6 +3,15 @@ const { Sequelize, Model } = require('sequelize')
 
 class Favor extends Model {
 
+    // 点赞
+    static async like(art_id, type) {
+        
+    }
+
+    // 取消点赞
+    static async dislike(art_id, type) {
+        
+    }
 }
 
 Favor.init({
