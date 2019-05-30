@@ -34,6 +34,15 @@ class Favor extends Model {
             await art.increment('fav_nums', { by: -1, transaction: t })
         })
     }
+
+    // 判断是否点赞过
+    static async isLike(artId, type, uid) {
+        const favor = await Favor.findOne({
+            where: { art_id: artId, type, uid }
+        })
+        const result = Boolean(favor)
+        return result
+    }
 }
 
 Favor.init({

@@ -9,6 +9,12 @@
     "lint": "eslint --ext .js",
     "lint-fix": "eslint --fix --ext .js"
   },
+  "_moduleAliases": {
+    "@": ".",
+    "@core": "core",
+    "@models": "app/models",
+    "@validators": "app/validators/validator"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/YpchenLove/Koa2-island.git"
@@ -24,6 +30,7 @@
     "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.11",
+    "module-alias": "^2.2.0",
     "mysql2": "^1.6.5",
     "nodemon": "^1.18.9",
     "require-directory": "^2.1.1",

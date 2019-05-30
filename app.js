@@ -8,6 +8,8 @@ const catchError = require('./middlewares/exception')
 const chalk = require('chalk')
 const config = require('./config')
 
+require('module-alias/register')
+
 const app = new Koa()
 const port = config.port
 
