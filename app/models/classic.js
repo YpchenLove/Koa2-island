@@ -26,7 +26,7 @@ class Sentence extends Model {
 
 }
 
-Movie.init(classicFields, {
+Sentence.init(classicFields, {
     sequelize: db,
     tableName: 'sentence'
 })
@@ -40,7 +40,7 @@ const musicFields = Object.assign(classicFields, {
     url: Sequelize.STRING
 })
 
-Movie.init(musicFields, {
+Music.init(musicFields, {
     sequelize: db,
     tableName: 'music'
 })

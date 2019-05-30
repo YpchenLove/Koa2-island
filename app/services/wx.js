@@ -28,8 +28,6 @@ class WXManager {
 
         return generateToken(user.id, Auth.USER)
     }
-
-    
 }
 
 module.exports = { WXManager }

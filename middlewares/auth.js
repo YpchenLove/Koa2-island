@@ -47,7 +47,7 @@ class Auth {
         try {
             jwt.verify(token, global.config.security.secretKey)
             return true
-        } catch {
+        } catch (err) {
             return false
         }
     }

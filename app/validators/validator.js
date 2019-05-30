@@ -7,7 +7,7 @@ class PositiveIntegerValidator extends LinValidator {
     constructor () {
         super()
         this.id = [
-            new Rule('isInt', '需要是正整数', { min: 3 })
+            new Rule('isInt', '需要是正整数', { min: 1 })
         ]
     }
 }
@@ -55,17 +55,7 @@ class TokenValidator extends LinValidator {
             new Rule('isOptional'),
             new Rule('isLength', '不符合账号规则', { min: 6, max: 128 })
         ]
-    }
-
-    // type校验
-    validateLoginType(vals) {
-        if (!vals.body.type) {
-            throw new Error('type不能为空！')
-        }
-        if (!loginType.isThisType(vals.body.type)) {
-            console.log(typeof vals.body.type)
-            throw new Error('type参数不合法！')
-        }
+        this.validateLoginType = checkType
     }
 }
 
@@ -74,8 +64,25 @@ class NotEmptyValidator extends LinValidator {
     constructor () {
         super()
         this.token = [
-            new Rule('isLength', '不允许为空', { min: 1})
+            new Rule('isLength', '不允许为空', { min: 1 })
         ]
+    }
+}
+
+// 点赞校验
+class LikeValidator extends PositiveIntegerValidator {
+    constructor () {
+        super()
+        this.validateType = checkType
+    }
+}
+
+function checkType(vals) {
+    if (!vals.body.type) {
+        throw new Error('type是必填参数')
+    }
+    if (!loginType.isThisType(vals.body.type)) {
+        throw new Error('type参数不合法')
     }
 }
 
@@ -83,5 +90,6 @@ module.exports = {
     PositiveIntegerValidator,
     RegisterValidator,
     TokenValidator,
-    NotEmptyValidator
+    NotEmptyValidator,
+    LikeValidator
 }

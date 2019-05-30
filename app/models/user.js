@@ -4,7 +4,6 @@ const { db } = require('../../core/db')
 const { Sequelize, Model } = require('sequelize')
 
 class User extends Model {
-
     // 验证账号
     static async verifyEmailPassword(email, plainPassword) {
         const user = await User.findOne({
