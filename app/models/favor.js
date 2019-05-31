@@ -14,7 +14,7 @@ class Favor extends Model {
         // 事务
         return db.transaction(async t => {
             await Favor.create({ art_id: artId, type, uid }, { transaction: t })
-            const art = await Art.getData(artId, type)
+            const art = await Art.getData(artId, type, false)
             await art.increment('fav_nums', { by: 1, transaction: t })
         })
     }
