@@ -78,10 +78,11 @@ class LikeValidator extends PositiveIntegerValidator {
 }
 
 function checkType(vals) {
-    if (!vals.body.type) {
+    const type = vals.body.type || vals.path.type
+    if (!type) {
         throw new Error('type是必填参数')
     }
-    if (!loginType.isThisType(vals.body.type)) {
+    if (!loginType.isThisType(parseInt(type))) {
         throw new Error('type参数不合法')
     }
 }

@@ -3,7 +3,7 @@ const { Auth } = require('../../../middlewares/auth')
 const { Flow } = require('@models/flow')
 const { Favor } = require('@models/favor')
 const { Art } = require('@models/art')
-const { PositiveIntegerValidator } = require('@validators')
+const { PositiveIntegerValidator, LikeValidator } = require('@validators')
 
 const router = new Router({
     prefix: '/v1/classic'
@@ -67,6 +67,26 @@ router.get('/:index/previous', new Auth().m, async (ctx, next) => {
     art.setDataValue('index', flow.index)
     art.setDataValue('like_status', status)
     ctx.body = art
+})
+
+/**
+* @route   GET /:id
+* @desc    获取期刊点赞信息
+* @access  private
+*/
+router.get('/:type/:id/favor', new Auth().m, async (ctx, next) => {
+    const v = await new LikeValidator().validate(ctx)
+    const id = v.get('path.id')
+    const type = parseInt(v.get('path.type'))
+    const art = await Art.getData(id, type, false)
+    if (!art) {
+        throw new global.errs.NotFound()
+    }
+    const status = await Favor.isLike(id, type, ctx.auth.uid)
+    ctx.body = {
+        fav_nums: art.fav_nums,
+        like_status: status
+    }
 })
 
 module.exports = router
