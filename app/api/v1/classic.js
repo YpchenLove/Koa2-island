@@ -70,7 +70,29 @@ router.get('/:index/previous', new Auth().m, async (ctx, next) => {
 })
 
 /**
-* @route   GET /:id
+* @route   GET /:type/:id
+* @desc    获取期刊详情
+* @access  private
+*/
+router.get('/:type/:id', new Auth().m, async (ctx, next) => {
+    const v = await new LikeValidator().validate(ctx)
+    const id = v.get('path.id')
+    const type = parseInt(v.get('path.type'))
+    const art = await Art.getData(id, type, false)
+    if (!art) {
+        throw new global.errs.NotFound()
+    }
+    const flow = await Flow.findOne({
+        where: { art_id: id }
+    })
+    const status = await Favor.isLike(id, type, ctx.auth.uid)
+    art.setDataValue('index', flow.index)
+    art.setDataValue('like_status', status)
+    ctx.body = art
+})
+
+/**
+* @route   GET /:type/:id/favor
 * @desc    获取期刊点赞信息
 * @access  private
 */

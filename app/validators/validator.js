@@ -1,6 +1,6 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { User } = require('../models/user')
-const { loginType } = require('../lib/enum')
+const { loginType, classicType } = require('../lib/enum')
 
 // 正整数校验
 class PositiveIntegerValidator extends LinValidator {
@@ -55,7 +55,15 @@ class TokenValidator extends LinValidator {
             new Rule('isOptional'),
             new Rule('isLength', '不符合账号规则', { min: 6, max: 128 })
         ]
-        this.validateLoginType = checkType
+    }
+    validateLoginType(vals) {
+        const type = vals.body.type
+        if (!type) {
+            throw new Error('type是必填参数')
+        }
+        if (!loginType.isThisType(parseInt(type))) {
+            throw new Error('type参数不合法')
+        }
     }
 }
 
@@ -82,7 +90,7 @@ function checkType(vals) {
     if (!type) {
         throw new Error('type是必填参数')
     }
-    if (!loginType.isThisType(parseInt(type))) {
+    if (!classicType.isThisType(parseInt(type))) {
         throw new Error('type参数不合法')
     }
 }
