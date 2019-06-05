@@ -5,6 +5,7 @@
 > 对书籍和期刊的点赞
 
 ### 进行点赞
+
 **URL**
 ```js
 POST  /like
@@ -30,3 +31,28 @@ POST  /like
 ```
 
 ### 取消点赞
+
+**URL**
+```js
+POST  /like/cancel
+```
+
+**params**
+* art_id： 点赞对象的id
+* type：类型：100 电影  200 音乐  300 句子  400 书籍
+
+**response**
+```js
+{
+    "msg": "ok",
+    "error_code": 0,
+    "request": "POST /v1/like/cancel"
+}
+
+{
+    "msg": "你已经取消点赞",
+    "error_code": 60002,
+    "request": "POST /v1/like/cancel"
+}
+```
+
