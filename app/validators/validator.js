@@ -90,7 +90,7 @@ function checkType(vals) {
     if (!type) {
         throw new Error('type是必填参数')
     }
-    if (!classicType.isThisType(parseInt(type))) {
+    if (!loginType.isThisType(parseInt(type))) {
         throw new Error('type参数不合法')
     }
 }

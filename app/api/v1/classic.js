@@ -111,4 +111,14 @@ router.get('/:type/:id/favor', new Auth().m, async (ctx, next) => {
     }
 })
 
+/**
+* @route   GET /favor
+* @desc    获取我喜欢的期刊
+* @access  private
+*/
+router.get('/favor', new Auth().m, async (ctx, next) => {
+    const uid = ctx.auth.uid
+    ctx.body = await Favor.getMyFavorClassic(uid)
+})
+
 module.exports = router
