@@ -1,6 +1,6 @@
-const { Movie, Music, Sentence } = require('../models/classic')
 const { Op } = require('sequelize')
 const { flatten } = require('lodash')
+const { Movie, Music, Sentence } = require('../models/classic')
 
 class Art {
     // 获取数据
