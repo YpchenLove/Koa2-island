@@ -1,7 +1,7 @@
 # API接口文档
 > api接口的文档
 
-**BASEURL**
+**BaseURL**
 ```js
 localhost:3000/
 ```

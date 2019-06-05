@@ -7,7 +7,7 @@ const router = new Router({
     prefix: '/v1/book'
 })
 
-router.get('/:id', new Auth().m, async (ctx, next) => {
+router.get('/hot', new Auth().m, async (ctx, next) => {
 
 })
 
