@@ -22,12 +22,14 @@ POST  /like
 
 **response**
 ```js
+status: 201
 {
     "msg": "ok",
     "error_code": 0,
     "request": "POST /v1/like/"
 }
 
+status: 400
 {
     "msg": "你已经点赞过了",
     "error_code": 60001,
@@ -48,12 +50,14 @@ POST  /like/cancel
 
 **response**
 ```js
+status: 201
 {
     "msg": "ok",
     "error_code": 0,
     "request": "POST /v1/like/cancel"
 }
 
+status: 400
 {
     "msg": "你已经取消点赞",
     "error_code": 60002,
