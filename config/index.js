@@ -16,6 +16,10 @@ const config = {
         AppID: 'wx83fc633e9309479f',
         AppSecret: '3d3bd227abc6ec51f58905e335c8f295',
         loginUrl: `https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code`
+    },
+    yushu: {
+        detailUrl: `http://t.yushu.im/v2/book/id/%s`,
+        keywordUrl: `http://t.yushu.im/v2/book/search?q=%s&count=%s&start=%s&summary=%s`
     }
 }
 

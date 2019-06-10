@@ -6,7 +6,10 @@ const classicFields = {
     image: Sequelize.STRING,        // 图片路径
     content: Sequelize.STRING,      // 内容
     title: Sequelize.STRING,        // 标题
-    fav_nums: Sequelize.INTEGER,    // 喜欢的人数
+    fav_nums: {
+        type: Sequelize.INTEGER,
+        default: 0
+    },                              // 喜欢的人数
     pubdate: Sequelize.DATEONLY,    // 发布日期
     type: Sequelize.TINYINT         // 类型
 }
