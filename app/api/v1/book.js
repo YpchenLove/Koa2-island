@@ -4,6 +4,7 @@ const { PositiveIntegerValidator, SearchValidator } = require('../../validators/
 const { Auth } = require('../../../middlewares/auth')
 const { HotBook } = require('@models/hot-book')
 const { Book } = require('@models/book')
+const { Favor } = require('@models/favor')
 
 const router = new Router({
     prefix: '/v1/book'
@@ -55,6 +56,17 @@ router.get('/favor/count', new Auth().m, async (ctx, next) => {
     ctx.body = {
         count
     }
+})
+
+/**
+* @route   GET /:book_id/favor
+* @desc    书籍点赞情况
+* @access  private
+*/
+router.get('/:book_id/favor', new Auth().m, async (ctx, next) => {
+    const v = await new PositiveIntegerValidator().validate(ctx, { id: 'book_id' })
+    const favor = await Favor.getMyFavorBook(v.get('path.book_id'), ctx.auth.uid)
+    ctx.body = favor
 })
 
 module.exports = router
