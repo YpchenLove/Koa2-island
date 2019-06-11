@@ -2,6 +2,7 @@ const util = require('util')
 const axios = require('axios')
 const { db } = require('../../core/db')
 const { Sequelize, Model } = require('sequelize')
+const { Favor } = require('@models/favor')
 
 class Book extends Model {
     constructor(id) {
@@ -13,6 +14,17 @@ class Book extends Model {
         const detail = await axios.get(url)
 
         return detail.data
+    }
+
+    // 喜欢的书籍数量
+    static async getMyFavorBookCount(uid) {
+        const count = await Favor.count({
+            where: {
+                uid,
+                type: 400
+            }
+        })
+        return count
     }
 
     // 搜索书籍

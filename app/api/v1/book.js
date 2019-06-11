@@ -38,10 +38,23 @@ router.get('/:id/detail', async (ctx, next) => {
 * @access  public
 */
 router.get('/search', async (ctx, next) => {
-    console.log(ctx.path)
     const v = await new SearchValidator().validate(ctx)
-    console.log(v.get('query.q'), v.get('query.start'), v.get('query.count'), v.get('query.summary'))
     const books = await Book.searchFromYushu(v.get('query.q'), v.get('query.start'), v.get('query.count'))
+
     ctx.body = books
 })
+
+/**
+* @route   GET /favor/count
+* @desc    获取我喜欢的书籍的数量
+* @access  private
+*/
+router.get('/favor/count', new Auth().m, async (ctx, next) => {
+    const count = await Book.getMyFavorBookCount(ctx.auth.uid)
+
+    ctx.body = {
+        count
+    }
+})
+
 module.exports = router
