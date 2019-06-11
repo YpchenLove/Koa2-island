@@ -38,8 +38,10 @@ router.get('/:id/detail', async (ctx, next) => {
 * @access  public
 */
 router.get('/search', async (ctx, next) => {
+    console.log(ctx.path)
     const v = await new SearchValidator().validate(ctx)
-    const books = await Book.searchFromYushu(v.get('path.q'), v.get('path.start'), v.get('path.count'), v.get('path.summary'))
+    console.log(v.get('query.q'), v.get('query.start'), v.get('query.count'), v.get('query.summary'))
+    const books = await Book.searchFromYushu(v.get('query.q'), v.get('query.start'), v.get('query.count'))
     ctx.body = books
 })
 module.exports = router

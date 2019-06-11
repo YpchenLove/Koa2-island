@@ -17,7 +17,8 @@ class Book extends Model {
 
     // 搜索书籍
     static async searchFromYushu(q, start, count, summary = 1) {
-        const url = util.format(global.config.yushu.keywordlUrl, encodeURI(q), start, count, summary)
+        const url = util.format(global.config.yushu.keywordUrl, encodeURI(q), start, count, summary)
+        console.log(url)
         const list = await axios.get(url)
         return list.data
     }
