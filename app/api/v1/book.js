@@ -1,9 +1,10 @@
 const Router = require('koa-router')
-const { HttpException } = require('../../../core/http-exception')
-const { PositiveIntegerValidator, SearchValidator } = require('../../validators/validator')
+const { Success } = require('../../../core/http-exception')
+const { PositiveIntegerValidator, SearchValidator, ShortCommentValidator } = require('../../validators/validator')
 const { Auth } = require('../../../middlewares/auth')
 const { HotBook } = require('@models/hot-book')
 const { Book } = require('@models/book')
+const { Comment } = require('@models/book-comment')
 const { Favor } = require('@models/favor')
 
 const router = new Router({
@@ -67,6 +68,48 @@ router.get('/:book_id/favor', new Auth().m, async (ctx, next) => {
     const v = await new PositiveIntegerValidator().validate(ctx, { id: 'book_id' })
     const favor = await Favor.getMyFavorBook(v.get('path.book_id'), ctx.auth.uid)
     ctx.body = favor
+})
+
+/**
+* @route   POST /add/short_comment
+* @desc    增加书籍短评
+* @access  private
+*/
+router.post('/add/short_comment', new Auth().m, async (ctx, next) => {
+    const v = await new ShortCommentValidator().validate(ctx, { id: 'book_id' })
+    const result = await Comment.addComment(v.get('body.book_id'), v.get('body.content'))
+    const msg = result ? '有相同评论，评论数+1' : '新增成功！'
+    throw new Success(msg)
+})
+
+/**
+* @route   GET /short_comment/:book_id
+* @desc    获取书籍短评
+* @access  public
+*/
+router.get('/:book_id/short_comment', async (ctx, next) => {
+    const v = await new PositiveIntegerValidator().validate(ctx, { id: 'book_id' })
+    const comment = await Comment.getComment(v.get('path.book_id'))
+    if (!comment) {
+        throw new global.errs.NotFound()
+    }
+    ctx.body = {
+        comment
+    }
+})
+
+/**
+* @route   GET /short_comment/hot
+* @desc    获取书籍短评
+* @access  public
+*/
+router.get('/hot_keyword', async (ctx, next) => {
+    ctx.body = [
+        'PDD',
+        '卢姥爷',
+        '芜湖大司马',
+        '正方形打野'
+    ]
 })
 
 module.exports = router

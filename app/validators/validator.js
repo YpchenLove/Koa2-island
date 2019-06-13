@@ -85,6 +85,16 @@ class LikeValidator extends PositiveIntegerValidator {
     }
 }
 
+function checkType(vals) {
+    const type = vals.body.type || vals.path.type
+    if (!type) {
+        throw new Error('type是必填参数')
+    }
+    if (!loginType.isThisType(parseInt(type))) {
+        throw new Error('type参数不合法')
+    }
+}
+
 // 搜索校验
 class SearchValidator extends LinValidator {
     constructor () {
@@ -103,13 +113,13 @@ class SearchValidator extends LinValidator {
     }
 }
 
-function checkType(vals) {
-    const type = vals.body.type || vals.path.type
-    if (!type) {
-        throw new Error('type是必填参数')
-    }
-    if (!loginType.isThisType(parseInt(type))) {
-        throw new Error('type参数不合法')
+// 短评校验
+class ShortCommentValidator extends PositiveIntegerValidator {
+    constructor () {
+        super()
+        this.content = [
+            new Rule('isLength', '必须在1~12个字之间', { min: 1, max: 12 })
+        ]
     }
 }
 
@@ -119,5 +129,6 @@ module.exports = {
     TokenValidator,
     NotEmptyValidator,
     LikeValidator,
-    SearchValidator
+    SearchValidator,
+    ShortCommentValidator
 }
