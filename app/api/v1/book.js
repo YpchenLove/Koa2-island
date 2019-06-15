@@ -99,8 +99,8 @@ router.get('/:book_id/short_comment', async (ctx, next) => {
 })
 
 /**
-* @route   GET /short_comment/hot
-* @desc    获取书籍短评
+* @route   GET /hot_keyword
+* @desc    获取书籍搜索的热门关键字
 * @access  public
 */
 router.get('/hot_keyword', async (ctx, next) => {
