@@ -1,4 +1,5 @@
-const Sequelize = require('sequelize')
+const { Sequelize, Model } = require('sequelize')
+const { unset, clone, isArray } = require('lodash')
 const chalk = require('chalk')
 const { database } = require('../config')
 const { dbName, host, port, user, password } = database
@@ -12,14 +13,14 @@ const db = new Sequelize(dbName, user, password, {
     define: {
         timestamps: true,
         paranoid: true,
-        createAt: 'create_at',
+        createdAt: 'created_at',
         updatedAt: 'updated_at',
         deletedAt: 'deleted_at',
         underscored: true,
         scopes: {
             bh: {
                 attributes: {
-                    exclude: ['create_at', 'updated_at', 'deleted_at', 'createAt']
+                    exclude: ['created_at', 'updated_at', 'deleted_at']
                 }
             }
         }
@@ -27,6 +28,22 @@ const db = new Sequelize(dbName, user, password, {
 })
 
 db.sync({ force: false })
+
+// 删除返回字段
+Model.prototype.toJSON = function() {
+    let data =  clone(this.dataValues)
+    unset(data, 'created_at')
+    unset(data, 'updated_at')
+    unset(data, 'deleted_at')
+
+    // 自定义删除字段
+    if (isArray(this.exclude)) {
+        this.exclude.forEach((value) => {
+            unset(data, value)
+        })
+    }
+    return data
+}
 
 /*
 * 验证是否连接数据库成功

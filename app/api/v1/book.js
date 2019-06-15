@@ -89,12 +89,12 @@ router.post('/add/short_comment', new Auth().m, async (ctx, next) => {
 */
 router.get('/:book_id/short_comment', async (ctx, next) => {
     const v = await new PositiveIntegerValidator().validate(ctx, { id: 'book_id' })
-    const comment = await Comment.getComment(v.get('path.book_id'))
-    if (!comment) {
+    const comments = await Comment.getComment(v.get('path.book_id'))
+    if (!comments) {
         throw new global.errs.NotFound()
     }
     ctx.body = {
-        comment
+        comments
     }
 })
 
