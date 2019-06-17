@@ -12,7 +12,7 @@ const db = new Sequelize(dbName, user, password, {
     define: {
         timestamps: true,
         paranoid: true,
-        createAt: 'create_at',
+        createAt: 'created_at',
         updatedAt: 'updated_at',
         deletedAt: 'deleted_at',
         underscored: true
