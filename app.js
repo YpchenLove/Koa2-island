@@ -12,6 +12,7 @@ const config = require('./config')
 
 require('module-alias/register')
 
+// 实例
 const app = new Koa()
 const port = config.port
 
