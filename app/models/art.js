@@ -21,6 +21,13 @@ class Art {
             art = await Sentence.scope(scope).findOne(finder)
             break
         case 400:
+            const { Book } = require('./book')
+            art = await Book.scope(scope).findOne(finder)
+            if (!art) {
+                art = await Book.create({
+                    id: artId
+                })
+            }
             break
         default:
             break

@@ -18,9 +18,7 @@ const router = new Router({
 */
 router.get('/hot', async (ctx, next) => {
     const books = await HotBook.getAll()
-    ctx.body = {
-        books
-    }
+    ctx.body = books
 })
 
 /**
@@ -30,8 +28,8 @@ router.get('/hot', async (ctx, next) => {
 */
 router.get('/:id/detail', async (ctx, next) => {
     const v = await new PositiveIntegerValidator().validate(ctx)
-    const book = new Book(v.get('path.id'))
-    ctx.body = await book.detail()
+    const book = new Book()
+    ctx.body = await book.detail(v.get('path.id'))
 })
 
 /**
@@ -83,18 +81,20 @@ router.post('/add/short_comment', new Auth().m, async (ctx, next) => {
 })
 
 /**
-* @route   GET /short_comment/:book_id
+* @route GET /:book_id/short_comment
 * @desc    获取书籍短评
 * @access  public
 */
 router.get('/:book_id/short_comment', async (ctx, next) => {
     const v = await new PositiveIntegerValidator().validate(ctx, { id: 'book_id' })
-    const comments = await Comment.getComment(v.get('path.book_id'))
+    const bookId = v.get('path.book_id')
+    const comments = await Comment.getComment(bookId)
     if (!comments) {
         throw new global.errs.NotFound()
     }
     ctx.body = {
-        comments
+        comments,
+        book_id: bookId
     }
 })
 
