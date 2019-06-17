@@ -19,7 +19,6 @@ class WXManager {
         if (errcode) {
             throw new global.errs.AuthFailed(`${errcode}：${errmsg}`)
         }
-
         let user = await User.getUserByOpenid(result.data.openid)
 
         if (!user) {

@@ -1,5 +1,7 @@
 // 核心库
 const Koa = require('koa')
+const koaStatic = require('koa-static')
+const path = require('path')
 const InitManager = require('./core/init')
 const parser = require('koa-bodyparser')
 const catchError = require('./middlewares/exception')
@@ -16,6 +18,7 @@ const port = config.port
 // 中间件
 app.use(catchError)
 app.use(parser())
+app.use(koaStatic(path.join(__dirname, './static')))
 
 //  初始化
 InitManager.initCore(app)

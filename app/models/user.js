@@ -30,7 +30,7 @@ class User extends Model {
     // 注册openid
     static async registerByOpenid (openid) {
         const user = await User.create({
-            where: { openid }
+            openid
         })
         return user
     }
